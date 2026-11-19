@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171923">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>SIRDAŞ AI — İlk Prototip</title>
+<style>
+:root{--bg:#10121a;--panel:#1b1e2a;--panel2:#252938;--text:#f7f4ef;--muted:#a9adbb;--accent:#f29a52;--line:#34394a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{max-width:760px;margin:auto;min-height:100dvh;display:flex;flex-direction:column}
+header{padding:18px 18px 14px;background:#171923;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border-radius:14px;background:var(--accent);color:#171923;display:grid;place-items:center;font-size:22px;font-weight:900}
+h1{font-size:18px;margin:0;letter-spacing:.7px} .sub{font-size:12px;color:var(--muted);margin-top:3px}
+.pill{margin-left:auto;border:1px solid #7c624e;color:#ffd1a8;border-radius:30px;padding:5px 9px;font-size:11px}
+main{padding:18px;flex:1}.hero{padding:18px;border-radius:22px;background:linear-gradient(145deg,#292b39,#1a1d28);border:1px solid var(--line)}
+h2{font-size:25px;margin:0 0 7px}.muted{color:var(--muted);font-size:14px;line-height:1.45}
+.tabs{display:flex;gap:7px;margin:16px 0}.tab{flex:1;padding:11px 7px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-weight:650}.tab.active{background:var(--accent);color:#21170f;border-color:var(--accent)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:15px;margin-top:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.choice{background:var(--panel2);border:1px solid var(--line);border-radius:15px;padding:12px;text-align:left;color:var(--text)}
+.avatar{height:150px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#6e6470,#343545 60%,#242735);font-size:68px;margin-bottom:9px}
+label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}input,select,textarea{width:100%;background:#11141d;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px;font-size:15px}
+button{cursor:pointer;font:inherit}.primary{width:100%;border:0;background:var(--accent);color:#21170f;border-radius:12px;padding:13px;font-weight:750;margin-top:12px}
+.chatlog{display:flex;flex-direction:column;gap:10px;min-height:170px;max-height:40vh;overflow:auto}.bubble{padding:11px 13px;border-radius:15px;max-width:88%;line-height:1.4;font-size:14px}.ai{background:var(--panel2);align-self:flex-start}.user{background:#754a2e;align-self:flex-end}
+.chatrow{display:flex;gap:8px;margin-top:12px}.chatrow input{flex:1;min-width:0}.chatrow button{border:0;border-radius:11px;background:var(--accent);padding:0 15px;color:#21170f;font-weight:700}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.action{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 5px;color:var(--text);font-size:12px}
+.notice{font-size:11px;color:var(--muted);line-height:1.5;margin-top:14px}.status{font-size:12px;color:#ffd1a8;margin-top:8px;min-height:17px}
+.hidden{display:none!important}
+footer{padding:14px 18px calc(14px + env(safe-area-inset-bottom));text-align:center;color:#858b9b;font-size:11px}
+@media(min-width:600px){main{padding:25px}.avatar{height:190px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">S</div><div><h1>SIRDAŞ AI</h1><div class="sub">Her an yanında · İlk prototip</div></div><span class="pill">18+</span></div></header>
+<main>
+<section class="hero"><h2>Yalnız değilsin.</h2><div class="muted">Kendi sanal arkadaşını oluştur. Sohbet et, sesini duy ve avatar deneyimini keşfet.</div></section>
+<nav class="tabs"><button class="tab active" data-tab="discover">Keşfet</button><button class="tab" data-tab="create">Karakterim</button><button class="tab" data-tab="chat">Sohbet</button></nav>
+<section id="discover" class="screen">
+ <div class="panel"><strong>Seni kim karşılasın?</strong><p class="muted">Bir karakter seçerek kişiselleştirmeye başla.</p>
+ <div class="grid">
+  <button class="choice" onclick="choose('Kadın','Lina')"><div class="avatar">👩🏻</div><strong>Kadın karakter</strong><div class="muted">Görünümünü özelleştir</div></button>
+  <button class="choice" onclick="choose('Erkek','Mert')"><div class="avatar">👨🏽</div><strong>Erkek karakter</strong><div class="muted">Görünümünü özelleştir</div></button>
+ </div></div>
+ <div class="panel"><strong>İlk sürüm hedefleri</strong><p class="muted">Yazılı sohbet · Sesli iletişim · Canlı konuşan avatar · Kişisel hafıza · Gizlilik kontrolleri</p></div>
+</section>
+<section id="create" class="screen hidden">
+ <div class="panel"><strong>Karakterini tasarla</strong>
+ <label>Karakter</label><select id="gender"><option>Kadın</option><option>Erkek</option></select>
+ <label>İsim</label><input id="charname" value="Lina" maxlength="24">
+ <label>Saç rengi</label><select id="hair"><option>Kumral</option><option>Sarışın</option><option>Siyah</option><option>Kızıl</option></select>
+ <label>Ten görünümü</label><select id="skin"><option>Açık ten</option><option>Buğday ten</option><option>Koyu ten</option></select>
+ <button class="primary" onclick="saveCharacter()">Karakterimi kaydet</button><p id="characterStatus" class="status"></p>
+ <p class="notice">Bu prototipte seçimler yalnızca bu cihazdaki tarayıcı oturumunda tutulur. Henüz sunucuya gönderilmez.</p></div>
+</section>
+<section id="chat" class="screen hidden">
+ <div class="panel"><strong id="chatTitle">Lina ile sohbet</strong><p class="muted">Bu ilk arayüz demosudur; henüz gerçek bir yapay zekâ servisine bağlı değildir.</p>
+ <div id="chatlog" class="chatlog"><div class="bubble ai">Merhaba! 😊 Bugün nasılsın? İstersen biraz sohbet edelim.</div></div>
+ <div class="chatrow"><input id="message" placeholder="Bir şey yaz..." autocomplete="off"><button onclick="sendMessage()">Gönder</button></div>
+ <div class="actions">
+  <button class="action" onclick="speakLast()">🔊 Cevabı seslendir</button>
+  <button class="action" onclick="voiceInfo()">🎙️ Sesli sohbet</button>
+  <button class="action" onclick="avatarInfo()">🎥 Canlı avatar</button>
+ </div><div id="featureStatus" class="status"></div>
+ <p class="notice">Seslendirme cihazının desteklediği tarayıcı sesini kullanır. Mikrofonlu yapay zekâ görüşmesi ve gerçek zamanlı dudak senkronizasyonu henüz bağlı değildir.</p>
+ </div>
+</section>
+<div class="notice">Gizlilik ilkesi: Bu prototipe gerçek kişisel, sağlık, finans veya mahrem bilgilerini yazma. Henüz hesap, şifreleme veya sunucu güvenliği kurulmadı.</div>
+</main>
+<footer>SIRDAŞ AI · Prototip v0.1 · 18 yaş ve üzeri konsept</footer>
+</div>
+<script>
+let lastText="Merhaba! Bugün nasılsın? İstersen biraz sohbet edelim.";
+function tab(name){document.querySelectorAll('.screen').forEach(x=>x.classList.add('hidden'));document.getElementById(name).classList.remove('hidden');document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===name));}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.tab)));
+function choose(g,n){document.getElementById('gender').value=g;document.getElementById('charname').value=n;tab('create');}
+function saveCharacter(){let n=document.getElementById('charname').value.trim()||'Sırdaşın';document.getElementById('chatTitle').textContent=n+' ile sohbet';document.getElementById('characterStatus').textContent='Karakter ayarları bu prototipte hazır.';tab('chat');}
+function sendMessage(){let i=document.getElementById('message'),v=i.value.trim();if(!v)return;addBubble(v,'user');i.value='';let answer='Bunu benimle paylaştığın için teşekkür ederim. Şu anda bu bir arayüz demosu; gerçek yapay zekâ bağlantısını bir sonraki teknik aşamada ekleyeceğiz.';lastText=answer;setTimeout(()=>addBubble(answer,'ai'),250);}
+function addBubble(t,c){let d=document.createElement('div');d.className='bubble '+c;d.textContent=t;let l=document.getElementById('chatlog');l.appendChild(d);l.scrollTop=l.scrollHeight;}
+function speakLast(){let s=document.getElementById('featureStatus');if(!('speechSynthesis'in window)){s.textContent='Bu tarayıcı sesli okumayı desteklemiyor.';return;}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(lastText);u.lang='tr-TR';speechSynthesis.speak(u);s.textContent='Cihazın desteklediği Türkçe ses kullanılıyor.';}
+function voiceInfo(){document.getElementById('featureStatus').textContent='Mikrofonlu, karşılıklı gerçek zamanlı AI konuşması sonraki aşamada bağlanacak. Şimdilik klavyenin dikte özelliğini kullanabilirsin.';}
+function avatarInfo(){document.getElementById('featureStatus').textContent='Canlı 3D avatar ve dudak senkronizasyonu henüz geliştirilmedi; bu ekran teknik entegrasyon için hazırlandı.';}
+</script>
+</body></html>
